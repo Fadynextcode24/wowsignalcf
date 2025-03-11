@@ -52,6 +52,16 @@
         p, code {
             color: #c9d1d9;
         }
+        .screenshot-block { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0, 0, 0, 0.9); 
+            z-index: 9999; 
+            display: none;
+        }
     </style>
     <script>
         document.addEventListener("keydown", function(event) {
@@ -80,18 +90,25 @@
         document.addEventListener("keyup", function(event) {
             if (event.key === "PrintScreen") {
                 event.preventDefault();
-                alert("Screenshoting is disabled!");
+                document.querySelector('.screenshot-block').style.display = 'block';
+                setTimeout(() => {
+                    document.querySelector('.screenshot-block').style.display = 'none';
+                }, 1000);
             }
         });
         document.addEventListener("keydown", function(event) {
             if (event.ctrlKey && event.key === "PrintScreen") {
                 event.preventDefault();
-                alert("Screenshoting is disabled!");
+                document.querySelector('.screenshot-block').style.display = 'block';
+                setTimeout(() => {
+                    document.querySelector('.screenshot-block').style.display = 'none';
+                }, 1000);
             }
         });
     </script>
 </head>
 <body>
+    <div class="screenshot-block"></div>
     <div class="container">
         <h1>Wow! Signal CTF</h1>
         <p>The famous Wow! Signal was detected in 1977. Can you decipher its hidden message?</p>
