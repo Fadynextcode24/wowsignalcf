@@ -8,7 +8,7 @@
         body { 
             font-family: 'Arial', sans-serif; 
             text-align: center; 
-            background: url('bg.jpg') no-repeat center center fixed;
+            background: url('images/background.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff; 
             margin: 0;
@@ -75,6 +75,18 @@
         document.addEventListener("keydown", function(event) {
             if (event.ctrlKey && event.key === "S") {
                 event.preventDefault();
+            }
+        });
+        document.addEventListener("keyup", function(event) {
+            if (event.key === "PrintScreen") {
+                event.preventDefault();
+                alert("Screenshoting is disabled!");
+            }
+        });
+        document.addEventListener("keydown", function(event) {
+            if (event.ctrlKey && event.key === "PrintScreen") {
+                event.preventDefault();
+                alert("Screenshoting is disabled!");
             }
         });
     </script>
