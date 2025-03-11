@@ -75,6 +75,28 @@
         }
     </style>
     <script>
+        function checkStep1() {
+            // Get the user input value
+            var userInput = document.getElementById("input1").value.trim();
+            
+            // The correct decoded message
+            var correctAnswer = "I am reaching.";
+
+            // Get the result element
+            var result = document.getElementById("step1-result");
+
+            // Check if the input matches the correct answer
+            if (userInput === correctAnswer) {
+                result.textContent = "Correct! You've decoded the message.";
+                result.style.color = "green";
+                result.classList.remove("hidden");
+            } else {
+                result.textContent = "Incorrect. Try again!";
+                result.style.color = "red";
+                result.classList.remove("hidden");
+            }
+        }
+
         function startEffects() {
             setInterval(() => {
                 document.querySelector('.container').style.animation = 'blurEffect 1s ease-in-out';
@@ -90,7 +112,7 @@
                 }, 500);
             }, 3000);
         }
-        
+
         window.onload = startEffects;
     </script>
 </head>
