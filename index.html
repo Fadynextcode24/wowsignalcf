@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wow! Signal CTF Challenge</title>
+    <title>Wow! Signal</title>
     <style>
         body { 
             font-family: 'Arial', sans-serif; 
@@ -22,6 +22,7 @@
             background: rgba(22, 27, 34, 0.9); 
             border-radius: 10px; 
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+            transition: transform 0.2s ease-in-out;
         }
         .hidden { display: none; }
         button { 
@@ -62,40 +63,35 @@
             z-index: 9999; 
             display: none;
         }
+        
+        @keyframes blurEffect {
+            0% { filter: blur(0px); }
+            50% { filter: blur(8px); }
+            100% { filter: blur(0px); }
+        }
+        @keyframes bounceEffect {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
     </style>
     <script>
-        document.addEventListener("keydown", function(event) {
-            if (event.ctrlKey && (event.key === "U" || event.key === "u")) {
-                event.preventDefault();
-            }
-        });
-        document.addEventListener("contextmenu", function(event) {
-            event.preventDefault();
-        });
-        document.addEventListener("keydown", function(event) {
-            if (event.ctrlKey && event.shiftKey && event.key === "I") {
-                event.preventDefault();
-            }
-        });
-        document.addEventListener("keydown", function(event) {
-            if (event.ctrlKey && event.shiftKey && event.key === "J") {
-                event.preventDefault();
-            }
-        });
-        document.addEventListener("keydown", function(event) {
-            if (event.ctrlKey && event.key === "S") {
-                event.preventDefault();
-            }
-        });
-        document.addEventListener("keyup", function(event) {
-            if (event.key === "PrintScreen" || (event.key === "Insert" && event.ctrlKey)) {
-                event.preventDefault();
-                document.querySelector('.screenshot-block').style.display = 'block';
+        function startEffects() {
+            setInterval(() => {
+                document.querySelector('.container').style.animation = 'blurEffect 1s ease-in-out';
                 setTimeout(() => {
-                    document.querySelector('.screenshot-block').style.display = 'none';
-                }, 2000);
-            }
-        });
+                    document.querySelector('.container').style.animation = '';
+                }, 1000);
+            }, 2000);
+
+            setInterval(() => {
+                document.querySelector('.container').style.animation = 'bounceEffect 0.5s ease-in-out';
+                setTimeout(() => {
+                    document.querySelector('.container').style.animation = '';
+                }, 500);
+            }, 3000);
+        }
+        
+        window.onload = startEffects;
     </script>
 </head>
 <body>
@@ -111,37 +107,6 @@
             <input type="text" id="input1" placeholder="Enter decoded text">
             <button onclick="checkStep1()">Submit</button>
             <p id="step1-result" class="hidden"></p>
-        </div>
-
-        <!-- Step 2: Frequency Analysis -->
-        <div id="step2" class="hidden">
-            <p><strong>Step 2:</strong> The signal corresponds to a special frequency in MHz. Identify it.</p>
-            <input type="text" id="input2" placeholder="Enter frequency in MHz">
-            <button onclick="checkStep2()">Submit</button>
-            <p id="step2-result" class="hidden"></p>
-        </div>
-
-        <!-- Step 3: Astronomical Coordinates -->
-        <div id="step3" class="hidden">
-            <p><strong>Step 3:</strong> Convert the right ascension (RA) and declination (Dec) of the signal's origin.</p>
-            <p>RA: 17h 45m 40s, Dec: -29° 00′ 28″</p>
-            <input type="text" id="input3" placeholder="Enter the star's name">
-            <button onclick="checkStep3()">Submit</button>
-            <p id="step3-result" class="hidden"></p>
-        </div>
-
-        <!-- Step 4: Final Cipher -->
-        <div id="step4" class="hidden">
-            <p><strong>Step 4:</strong> Use a Vigenère cipher with the key <strong>1977</strong> to decode this: <code>Xjvw! Xhzk!</code></p>
-            <input type="text" id="input4" placeholder="Enter the decoded message">
-            <button onclick="checkStep4()">Submit</button>
-            <p id="step4-result" class="hidden"></p>
-        </div>
-
-        <!-- Final Flag -->
-        <div id="flag" class="hidden">
-            <h2>Congratulations!</h2>
-            <p>The flag is: <strong>WOW-42-ET</strong></p>
         </div>
     </div>
 </body>
